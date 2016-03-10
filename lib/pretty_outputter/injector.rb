@@ -2,8 +2,13 @@ module PrettyOutputter
   def self.included(klass)
     klass.class_exec do
       define_method :initialize do
-        file_contents = YAML.load_file("#{klass.name}.yml").symbolize_keys
-        klass.const_set(:MESSAGES, file_contents)
+        begin
+          file_contents = YAML.load_file("#{klass.name}.yml").symbolize_keys
+        rescue Errno::ENOENT
+          abort "File #{klass.name + '.yml'} does not exist..."
+        else
+          klass.const_set(:MESSAGES, file_contents)
+        end
       end
 
       define_method :render do |key, values = {}|
