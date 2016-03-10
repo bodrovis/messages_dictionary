@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email            = ["golosizpru@gmail.com"]
   spec.summary          = %q{}
   spec.description      = %q{}
-  spec.homepage         = ""
+  spec.homepage         = "https://github.com/bodrovis-learning/PrettyOutputter"
   spec.license          = "MIT"
   spec.platform         = Gem::Platform::RUBY
 
