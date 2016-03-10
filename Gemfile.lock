@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pretty_outputter (0.0.1.pre1)
+    pretty_outputter (0.0.1.pre3)
 
 GEM
   remote: http://rubygems.org/
