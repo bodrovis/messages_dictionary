@@ -3,7 +3,7 @@ module PrettyOutputter
     klass.class_exec do
       define_method :initialize do
         file_contents = YAML.load_file("#{klass.name}.yml").symbolize_keys
-        klass.const_set(:MESSAGE, file_contents)
+        klass.const_set(:MESSAGES, file_contents)
       end
 
       define_method :render do |key, values = {}|
