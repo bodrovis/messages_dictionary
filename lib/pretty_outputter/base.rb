@@ -1,4 +1,4 @@
-module Outputter
+module PrettyOutputter
   def self.included(klass)
     klass.class_exec do
       define_method :initialize do
