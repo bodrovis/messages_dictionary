@@ -6,7 +6,11 @@ various messages in a simple key-value format that can be fetched later. Message
 can be stored inside files or passed as hashes (nested hashes are supported as well). Custom fetching rules
 can be specified as well.
 
-Refer to the next section to see it in action.
+Install it
+
+    gem install messages_dictionary
+
+and refer to the next section to see it in action.
 
 ## Usage
 
