@@ -1,4 +1,5 @@
 # MessagesDictionary
+[![Gem Version](https://badge.fury.io/rb/messages_dictionary.svg)](https://badge.fury.io/rb/messages_dictionary)
 
 This gem was created as an educational project for my student. The idea behind this gem is to organize
 various messages in a simple key-value format that can be fetched later. Messages support interpolation,
