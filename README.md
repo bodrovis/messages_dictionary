@@ -6,6 +6,12 @@ various messages in a simple key-value format that can be fetched later. Message
 can be stored inside files or passed as hashes (nested hashes are supported as well). Custom fetching rules
 can be specified as well.
 
+Some use-cases can be found, for example, in the [Guesser](https://github.com/bodrovis/Guesser) game:
+
+* [Messages are stored inside files](https://github.com/bodrovis/Guesser/tree/master/lib/guesser/messages)
+* [Displaying errors](https://github.com/bodrovis/Guesser/blob/master/lib/guesser.rb#L25)
+* [Displaying informational messages](https://github.com/bodrovis/Guesser/blob/master/lib/guesser/game.rb#L29)
+
 Install it
 
     gem install messages_dictionary
