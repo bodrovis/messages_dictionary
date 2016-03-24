@@ -48,6 +48,8 @@ end
 These messages are scattered all over the program and can be hard to maintain. With `messages_dictionary` you can transform it into
 
 ```ruby
+require 'messages_dictionary' # For brevity this line will be omitted in other examples
+
 class MyClass
   include MessagesDictionary
   has_messages_dictionary
