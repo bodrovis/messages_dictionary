@@ -2,6 +2,7 @@
 [![Gem Version](https://badge.fury.io/rb/messages_dictionary.svg)](https://badge.fury.io/rb/messages_dictionary)
 [![Build Status](https://travis-ci.org/bodrovis-learning/messages_dictionary.svg?branch=master)](https://travis-ci.org/bodrovis-learning/messages_dictionary)
 [![Code Climate](https://codeclimate.com/github/bodrovis-learning/messages_dictionary/badges/gpa.svg)](https://codeclimate.com/github/bodrovis-learning/messages_dictionary)
+[![Dependency Status](https://gemnasium.com/bodrovis-learning/messages_dictionary.svg)](https://gemnasium.com/bodrovis-learning/messages_dictionary)
 
 This gem was created as an educational project for my student. The idea behind this gem is to organize
 various messages in a simple key-value format that can be fetched later. Messages support interpolation,
