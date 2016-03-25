@@ -26,13 +26,11 @@ module MessagesDictionary
         values.each do |k, v|
           msg.gsub!(Regexp.new('\{\{' + k.to_s + '\}\}'), v.to_s)
         end
-
         transform = klass::DICTIONARY_CONF[:transform] || block
         transform ?
             transform.call(msg) :
             klass::DICTIONARY_CONF[:output].send(klass::DICTIONARY_CONF[:method].to_sym, msg)
       end
-
       private :pretty_output
     end
   end
