@@ -19,7 +19,7 @@ RSpec.describe MessagesDictionary do
       end
 
       object = @subject.new
-      expect( object.send(:pretty_output, 'test') {|msg| msg.upcase} ).to eq('STRING')
+      expect( object.send(:pretty_output, :test) {|msg| msg.upcase!} ).to eq('STRING')
     end
 
     it "applies per-class transformations" do
@@ -29,7 +29,7 @@ RSpec.describe MessagesDictionary do
       end
 
       object = @subject.new
-      expect( object.send(:pretty_output, 'test') ).to eq('STRING')
+      expect( object.send(:pretty_output, :test) ).to eq('STRING')
     end
   end
 end
