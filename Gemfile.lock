@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    messages_dictionary (0.1.0)
+    messages_dictionary (0.1.1)
       hashie (~> 3.4)
 
 GEM
