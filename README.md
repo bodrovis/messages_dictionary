@@ -4,22 +4,31 @@
 [![Code Climate](https://codeclimate.com/github/bodrovis-learning/messages_dictionary/badges/gpa.svg)](https://codeclimate.com/github/bodrovis-learning/messages_dictionary)
 [![Dependency Status](https://gemnasium.com/bodrovis-learning/messages_dictionary.svg)](https://gemnasium.com/bodrovis-learning/messages_dictionary)
 
-This gem was created as an educational project for my student. The idea behind this gem is to organize
+This gem started as an educational project for my student. The idea behind this gem is to organize
 various messages in a simple key-value format that can be fetched later. Messages support interpolation,
 can be stored inside files or passed as hashes (nested hashes are supported as well). Custom fetching rules
 can be specified as well.
-
-Some use-cases can be found, for example, in the [Guesser](https://github.com/bodrovis/Guesser) game:
-
-* [Messages are stored inside files](https://github.com/bodrovis/Guesser/tree/master/lib/guesser/messages)
-* [Displaying errors](https://github.com/bodrovis/Guesser/blob/master/lib/guesser.rb#L25)
-* [Displaying informational messages](https://github.com/bodrovis/Guesser/blob/master/lib/guesser/game.rb#L29)
 
 Install it
 
     gem install messages_dictionary
 
-and refer to the next section to see it in action.
+and refer to the next sections to see it in action.
+
+## Use Cases
+
+Wanna see it in action? Some use-cases can be found, in the [Guesser](https://github.com/bodrovis/Guesser) game:
+
+* [Messages are stored inside files](https://github.com/bodrovis/Guesser/tree/master/lib/guesser/messages)
+* [Displaying errors](https://github.com/bodrovis/Guesser/blob/master/lib/guesser.rb#L25)
+* [Displaying informational messages](https://github.com/bodrovis/Guesser/blob/master/lib/guesser/game.rb#L29)
+
+Another, a bit more complex, use case in the [lessons_indexer gem](https://github.com/bodrovis/lessons_indexer):
+
+* [Messages are stored in a single file](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer/messages/messages.yml)
+* [Messenger class equipped with messages_dictionary magic is defined](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer.rb#L7)
+* [Other classes simply inherit from it](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer/indexer.rb#L2)
+* [Messages are fetched easily](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer/indexer.rb#L45)
 
 ## Usage
 
