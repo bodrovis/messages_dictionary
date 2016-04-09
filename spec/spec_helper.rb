@@ -9,4 +9,6 @@ require 'messages_dictionary'
 
 RSpec.configure do |config|
   config.include SpecAddons
+  config.include SpecFilesSetup
+  config.include SpecUtils
 end

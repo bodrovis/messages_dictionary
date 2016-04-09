@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    messages_dictionary (0.0.1.rc2)
+    messages_dictionary (0.0.1)
       hashie (~> 3.4)
 
 GEM
@@ -19,7 +19,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rake (10.5.0)
+    rake (11.1.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -48,7 +48,7 @@ DEPENDENCIES
   codeclimate-test-reporter (~> 0.5)
   messages_dictionary!
   pry
-  rake (~> 10.5)
+  rake (~> 11.1)
   rspec (~> 3.4)
 
 BUNDLED WITH

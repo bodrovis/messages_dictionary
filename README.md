@@ -90,6 +90,10 @@ show_values: "The first value is {{a}}, the second is {{b}}"
 welcome: "Welcome!"
 ```
 
+**Please note**, that if your class is named `MyModule::MyClass`, then by default the program will search
+for a file named `my_class.yml` inside `my_module` directory. This can be further customized, refer
+the "Further Customization" section for more info.
+
 So by saying `pretty_output(:show_result, result: result)` you are fetching a message under the key
 `show_result` and replace the `{{result}}` part with the value of the `result` variable. Simple, eh?
 
