@@ -32,6 +32,7 @@ module MessagesDictionary
             klass::DICTIONARY_CONF[:output].send(klass::DICTIONARY_CONF[:method].to_sym, msg)
       end
       private :pretty_output
+      alias_method :pou, :pretty_output
     end
   end
 end

@@ -71,6 +71,8 @@ class MyOtherClass
 
   def greet
     pretty_output(:welcome)
+    # Or simply
+    pou(:welcome)
   end
 end
 ```
@@ -117,14 +119,14 @@ class MyClass
   has_messages_dictionary
 
   def do_something
-    pretty_output('nested.value') # => 'Nested value'
+    pou('nested.value') # => 'Nested value'
   end
 end
 ```
 
 ### Indifferent Access
 
-Keys can be passed to the `pretty_output` method as symbols or strings - it does not really matter:
+Keys can be passed to the `pou` method as symbols or strings - it does not really matter:
 
 ```ruby
 class MyClass
@@ -133,9 +135,9 @@ class MyClass
 
   def calculate(a)
     result = a ** 2
-    pretty_output(:show_result, result: result)
+    pou(:show_result, result: result)
     # OR
-    pretty_output('show_result', result: result)
+    pou('show_result', result: result)
   end
 end
 ```
@@ -199,7 +201,7 @@ class MyClass
   has_messages_dictionary
 
   def greet
-    pretty_output(:welcome) do |msg|
+    pou(:welcome) do |msg|
       msg.upcase!
     end
   end
@@ -218,7 +220,7 @@ class MyClass
   has_messages_dictionary transform: ->(msg) {msg.upcase!}
 
   def greet
-    pretty_output(:welcome)
+    pou(:welcome)
   end
 end
 
@@ -234,7 +236,7 @@ If you do want to output your message after transformation, you have to do it ex
 
 ```ruby
   def greet
-    pretty_output(:welcome) do |msg|
+    pou(:welcome) do |msg|
       msg.upcase!
       puts msg # => Prints "WELCOME"
     end

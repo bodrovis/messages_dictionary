@@ -40,6 +40,17 @@ RSpec.describe MessagesDictionary do
         expect(output).to receive(:custom_puts).with('string')
         object.send(:pretty_output, :test)
       end
+
+      it "aliases pretty_output as pou" do
+        output = double('output')
+        @subject.class_eval do
+          has_messages_dictionary messages: {test: 'string'}, output: output
+        end
+
+        object = @subject.new
+        expect(output).to receive(:puts).with('string')
+        object.send(:pou, :test)
+      end
     end
 
     context "passed as hash" do
