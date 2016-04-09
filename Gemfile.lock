@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    messages_dictionary (0.0.1)
+    messages_dictionary (0.0.2)
       hashie (~> 3.4)
 
 GEM
@@ -9,16 +9,10 @@ GEM
   specs:
     codeclimate-test-reporter (0.5.0)
       simplecov (>= 0.7.1, < 1.0.0)
-    coderay (1.1.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     hashie (3.4.3)
     json (1.8.3)
-    method_source (0.8.2)
-    pry (0.10.3)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
     rake (11.1.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
@@ -38,7 +32,6 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    slop (3.6.0)
 
 PLATFORMS
   ruby
@@ -47,7 +40,6 @@ PLATFORMS
 DEPENDENCIES
   codeclimate-test-reporter (~> 0.5)
   messages_dictionary!
-  pry
   rake (~> 11.1)
   rspec (~> 3.4)
 
