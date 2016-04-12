@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors          = ["Ilya Bodrov", "anilika"]
   spec.email            = ["golosizpru@gmail.com"]
   spec.summary          = %q{Store your messages anywhere and fetch them anytime.}
-  spec.description      = %q{This gem allows you to store messages in a simple-key value format and fetch whenever you need. Classes can have different messages and apply different fetching logic. Messages also support interpolation.}
+  spec.description      = %q{This gem allows you to store some text in a simple-key value format and fetch it whenever you need from your methods. Various classes may have different messages attached and apply different fetching logic. Messages also support interpolation and can be stored in separate YAML files.}
   spec.homepage         = "https://github.com/bodrovis-learning/messages_dictionary"
   spec.license          = "MIT"
   spec.platform         = Gem::Platform::RUBY
