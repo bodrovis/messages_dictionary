@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'hashie', '~> 3.4'
 
-  spec.add_development_dependency "rake", "~> 11.1"
-  spec.add_development_dependency "rspec", "~> 3.4"
-  spec.add_development_dependency "codeclimate-test-reporter", "~> 0.5"
+  spec.add_development_dependency "rake", "~> 11.3"
+  spec.add_development_dependency "rspec", "~> 3.5"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 0.6"
 end
