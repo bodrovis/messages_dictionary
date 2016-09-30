@@ -237,6 +237,8 @@ my_object = MyClass.new
 my_object.greet # Will return "WELCOME", nothing will be put on the screen
 ```
 
+Transformation provided per method takes higher precedence than the one provided per class.
+
 **Please note** that by default MessagesDictionary **does not output anything** when you provide transformation
 block. This is done to allow more control, because sometimes you may want to fetch a message, but not output
 it anywhere (for example, when raising a custom error - see use case [here](https://github.com/bodrovis/Guesser/blob/master/lib/guesser.rb#L25)).

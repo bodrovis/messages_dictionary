@@ -132,5 +132,15 @@ RSpec.describe MessagesDictionary do
       object = @subject.new
       expect( object.send(:pretty_output, :test) ).to eq('STRING')
     end
+
+    it "per-method takes higher priority than per-class" do
+      @subject.class_eval do
+        has_messages_dictionary messages: {test: 'string'},
+                                transform: ->(msg) {msg.reverse!}
+      end
+
+      object = @subject.new
+      expect( object.send(:pretty_output, :test) {|msg| msg.upcase!} ).to eq('STRING')
+    end
   end
 end
