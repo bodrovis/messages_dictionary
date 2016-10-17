@@ -9,6 +9,8 @@ various messages in a simple key-value format that can be fetched later. Message
 can be stored inside files or passed as hashes (nested hashes are supported as well). Custom fetching rules
 can be specified as well.
 
+[Here is my article](https://www.sitepoint.com/learn-ruby-metaprogramming-for-great-good/) describing how this gem was actually written.
+
 Install it
 
     gem install messages_dictionary
