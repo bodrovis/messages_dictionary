@@ -260,4 +260,4 @@ If you do want to output your message after transformation, you have to do it ex
 
 Licensed under the [MIT License](https://github.com/bodrovis-learning/messages_dictionary/blob/master/LICENSE).
 
-Copyright (c) 2016 [Ilya Bodrov](http://radiant-wind.com)
+Copyright (c) 2016 [Ilya Bodrov](http://bodrovis.tech)

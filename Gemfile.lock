@@ -7,8 +7,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    codeclimate-test-reporter (0.6.0)
-      simplecov (>= 0.7.1, < 1.0.0)
+    codeclimate-test-reporter (1.0.3)
+      simplecov
     diff-lcs (1.2.5)
     docile (1.1.5)
     hashie (3.4.6)
@@ -18,7 +18,7 @@ GEM
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.3)
+    rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -38,10 +38,10 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  codeclimate-test-reporter (~> 0.6)
+  codeclimate-test-reporter (~> 1.0)
   messages_dictionary!
   rake (~> 11.3)
   rspec (~> 3.5)
 
 BUNDLED WITH
-   1.13.1
+   1.13.6
