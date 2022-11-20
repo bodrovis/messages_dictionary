@@ -34,6 +34,6 @@ module SpecUtils
 
     Dir.chdir '../../'
 
-    clear_env!(path, file)
+    clear_env!(path)
   end
 end

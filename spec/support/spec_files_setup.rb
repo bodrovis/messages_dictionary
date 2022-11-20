@@ -13,7 +13,7 @@ module SpecFilesSetup
     f.close
   end
 
-  def clear_env!(path, file)
-    FileUtils.remove_entry("./spec/dummy/#{path}/#{file}")
+  def clear_env!(path)
+    FileUtils.remove_entry("./spec/dummy/#{path}")
   end
 end
