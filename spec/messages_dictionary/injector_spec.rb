@@ -122,13 +122,13 @@ RSpec.describe MessagesDictionary::Injector do
       end
 
       object = dummy.new
-      expect(object.send(:pretty_output, :test, &:upcase!)).to eq('STRING')
+      expect(object.send(:pretty_output, :test, &:upcase)).to eq('STRING')
     end
 
     it 'applies per-class transformations' do
       dummy.class_eval do
         has_messages_dictionary messages: {test: 'string'},
-                                transform: ->(msg) { msg.upcase! }
+                                transform: ->(msg) { msg.upcase }
       end
 
       object = dummy.new
@@ -138,11 +138,11 @@ RSpec.describe MessagesDictionary::Injector do
     it 'per-method takes higher priority than per-class' do
       dummy.class_eval do
         has_messages_dictionary messages: {test: 'string'},
-                                transform: ->(msg) { msg.reverse! }
+                                transform: ->(msg) { msg.reverse }
       end
 
       object = dummy.new
-      expect(object.send(:pretty_output, :test, &:upcase!)).to eq('STRING')
+      expect(object.send(:pretty_output, :test, &:upcase)).to eq('STRING')
     end
   end
 end

@@ -1,5 +1,6 @@
 # MessagesDictionary
 [![Gem Version](https://badge.fury.io/rb/messages_dictionary.svg)](https://badge.fury.io/rb/messages_dictionary)
+![CI](https://github.com/bodrovis-learning/messages_dictionary/actions/workflows/ci.yml/badge.svg)
 
 This gem started as an educational project for my student. The idea behind this gem is to organize
 various messages in a simple key-value format that can be fetched later. Messages support interpolation,
@@ -210,7 +211,7 @@ class MyClass
 
   def greet
     pou(:welcome) do |msg|
-      msg.upcase!
+      msg.upcase
     end
   end
 end
@@ -225,7 +226,7 @@ option:
 ```ruby
 class MyClass
   include MessagesDictionary
-  has_messages_dictionary transform: ->(msg) {msg.upcase!}
+  has_messages_dictionary transform: ->(msg) {msg.upcase}
 
   def greet
     pou(:welcome)
@@ -247,8 +248,7 @@ If you do want to output your message after transformation, you have to do it ex
 ```ruby
   def greet
     pou(:welcome) do |msg|
-      msg.upcase!
-      puts msg # => Prints "WELCOME"
+      puts msg.upcase # => Prints "WELCOME"
     end
   end
 ```

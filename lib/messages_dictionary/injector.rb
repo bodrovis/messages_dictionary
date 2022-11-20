@@ -35,7 +35,7 @@ module MessagesDictionary
           end
           transform = block || klass::DICTIONARY_CONF[:transform]
           if transform
-            transform.call(msg.dup)
+            transform.call(msg)
           else
             klass::DICTIONARY_CONF[:output].send(klass::DICTIONARY_CONF[:method].to_sym, msg)
           end
