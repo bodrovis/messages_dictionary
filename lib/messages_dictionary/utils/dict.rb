@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 module MessagesDictionary
-  class Dict < Hash
-    include Hashie::Extensions::MergeInitializer
-    include Hashie::Extensions::IndifferentAccess
+  module Utils
+    class Dict < Hash
+      include Hashie::Extensions::MergeInitializer
+      include Hashie::Extensions::IndifferentAccess
+    end
   end
 end

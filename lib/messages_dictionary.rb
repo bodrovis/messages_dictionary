@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'yaml'
 require 'hashie'
+require 'zeitwerk'
 
-require_relative 'messages_dictionary/utils/snake_case'
-require_relative 'messages_dictionary/utils/dict'
-require_relative 'messages_dictionary/injector'
+loader = Zeitwerk::Loader.for_gem
+loader.setup
 
 module MessagesDictionary
 end
-
