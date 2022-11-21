@@ -1,5 +1,13 @@
-# RubyMine config files
-.idea/
+.idea/*
 *.gem
+coverage/*
 Gemfile.lock
-coverage/
+*~
+.bundle
+.rvmrc
+log/*
+measurement/*
+pkg/*
+.DS_Store
+.env
+demo.rb

@@ -6,6 +6,11 @@ SimpleCov.start do
   add_filter '/bin/'
 end
 
+if ENV.fetch('CI', nil) == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
 $LOAD_PATH << File.expand_path('../../lib', __dir__)
 
 RSPEC_ROOT = File.dirname __FILE__
