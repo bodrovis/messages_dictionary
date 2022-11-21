@@ -17,7 +17,9 @@ module MessagesDictionary
       # with all the necesary goodies
       def has_messages_dictionary(opts = {})
         # rubocop:enable Naming/PredicateName
-        messages = __powerup(opts.fetch(:messages) { __from_file(opts) })
+        messages = MessagesDictionary::Utils::Dict.new(
+          opts.fetch(:messages) { __from_file(opts) }
+        )
 
         const_set(:DICTIONARY_CONF, {msgs: messages,
                                      output: opts[:output] || $stdout,
@@ -26,10 +28,6 @@ module MessagesDictionary
       end
 
       private
-
-      def __powerup(messages)
-        MessagesDictionary::Utils::Dict.new(messages).extend(Hashie::Extensions::DeepFetch)
-      end
 
       def __from_file(opts)
         file = opts[:file] || "#{name.nil? ? 'unknown' : name.snakecase}.yml"
