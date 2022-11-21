@@ -7,7 +7,10 @@ SimpleCov.start do
 end
 
 $LOAD_PATH << File.expand_path('../../lib', __dir__)
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
+
+RSPEC_ROOT = File.dirname __FILE__
+
+Dir["#{RSPEC_ROOT}/support/**/*.rb"].sort.each { |f| require f }
 
 require 'messages_dictionary'
 

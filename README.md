@@ -9,11 +9,13 @@ can be specified as well.
 
 [Here is my article](https://www.sitepoint.com/learn-ruby-metaprogramming-for-great-good/) describing how this gem was actually written.
 
-Install it
+This gem requires Ruby 2.7+. Install it by running:
 
-    gem install messages_dictionary
+```
+gem install messages_dictionary
+```
 
-and refer to the next sections to see it in action.
+Refer to the next sections to see it in action.
 
 ## Use Cases
 
@@ -213,6 +215,10 @@ class MyClass
     pou(:welcome) do |msg|
       msg.upcase
     end
+
+    # Or simply:
+
+    pou(:welcome, &:upcase)
   end
 end
 
@@ -246,15 +252,15 @@ it anywhere (for example, when raising a custom error - see use case [here](http
 If you do want to output your message after transformation, you have to do it explicitly:
 
 ```ruby
-  def greet
-    pou(:welcome) do |msg|
-      puts msg.upcase # => Prints "WELCOME"
-    end
+def greet
+  pou(:welcome) do |msg|
+    puts msg.upcase # => Prints "WELCOME"
   end
+end
 ```
 
 ## License
 
 Licensed under the [MIT License](https://github.com/bodrovis-learning/messages_dictionary/blob/master/LICENSE).
 
-Copyright (c) 2016 [Ilya Krukowski](http://bodrovis.tech)
+Copyright (c) 2022 [Ilya Krukowski](http://bodrovis.tech)

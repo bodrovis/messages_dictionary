@@ -33,9 +33,6 @@ Style/CollectionMethods:
     find_all: 'select'
     delete:   'gsub'
 
-Style/Documentation:
-  Enabled: false
-
 Layout/DotPosition:
   EnforcedStyle: trailing
 

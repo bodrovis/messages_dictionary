@@ -4,7 +4,7 @@ require 'fileutils'
 
 module SpecFilesSetup
   def setup_env!(path, file)
-    full_path = "./spec/dummy/#{path}"
+    full_path = "#{RSPEC_ROOT}/dummy/#{path}"
 
     FileUtils.mkdir_p full_path
 
@@ -14,6 +14,6 @@ module SpecFilesSetup
   end
 
   def clear_env!(path)
-    FileUtils.remove_entry("./spec/dummy/#{path}")
+    FileUtils.remove_entry("#{RSPEC_ROOT}/dummy/#{path}")
   end
 end

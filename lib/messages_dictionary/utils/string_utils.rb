@@ -2,6 +2,7 @@
 
 module MessagesDictionary
   module Utils
+    # Utility methods for strings
     module StringUtils
       refine String do
         # Underscore a string such that camelcase, dashes and spaces are

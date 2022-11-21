@@ -34,7 +34,7 @@ RSpec.describe MessagesDictionary::Injector do
 
         object.send(:pretty_output, :test)
 
-        expect(output).to have_received(:print).with('string').exactly(1).times
+        expect(output).to have_received(:print).with('string').exactly(1).time
       end
 
       it 'aliases pretty_output as pou' do
@@ -50,7 +50,7 @@ RSpec.describe MessagesDictionary::Injector do
 
         object.send(:pou, :test)
 
-        expect(output).to have_received(:puts).with('string').exactly(1).times
+        expect(output).to have_received(:puts).with('string').exactly(1).time
       end
     end
 
@@ -66,6 +66,17 @@ RSpec.describe MessagesDictionary::Injector do
     end
 
     context 'when passed in file' do
+      it 'works with anonymous classes' do
+        in_dir 'unknown.yml' do
+          dummy.class_eval do
+            has_messages_dictionary
+          end
+
+          object = dummy.new
+          expect(object.send(:pretty_output, :test) { |msg| msg }).to eq('string')
+        end
+      end
+
       it 'searches file named after class name by default' do
         in_dir 'fake_class.yml' do
           stub_const 'FakeClass', dummy
@@ -104,14 +115,14 @@ RSpec.describe MessagesDictionary::Injector do
     end
 
     it 'is raised when file is not found and the program aborts' do
-      err = capture_stderr do
-        expect do
-          dummy.class_eval do
-            has_messages_dictionary dir: 'random', file: 'not_exist.yml'
-          end
-        end.to raise_error(SystemExit)
-      end.strip
-      expect(err).to eq("File #{File.expand_path('random/not_exist.yml')} does not exist...")
+      expect do
+        dummy.class_eval do
+          has_messages_dictionary dir: 'random', file: 'not_exist.yml'
+        end
+      end.to raise_error(
+        an_instance_of(SystemExit).
+        and(having_attributes(message: "File #{File.expand_path('random/not_exist.yml')} does not exist..."))
+      )
     end
   end
 
@@ -128,11 +139,20 @@ RSpec.describe MessagesDictionary::Injector do
     it 'applies per-class transformations' do
       dummy.class_eval do
         has_messages_dictionary messages: {test: 'string'},
-                                transform: ->(msg) { msg.upcase }
+                                transform: ->(msg) { puts msg.upcase }
+
+        define_method :run do
+          pou(:test)
+        end
       end
 
       object = dummy.new
-      expect(object.send(:pretty_output, :test)).to eq('STRING')
+
+      allow($stdout).to receive(:puts).with('STRING')
+
+      object.run
+
+      expect($stdout).to have_received(:puts).exactly(1).time
     end
 
     it 'per-method takes higher priority than per-class' do
