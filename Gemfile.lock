@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    messages_dictionary (2.0.0)
+    messages_dictionary (2.1.0)
       hashie (~> 5.0)
       zeitwerk (~> 2.4)
 

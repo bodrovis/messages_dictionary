@@ -84,7 +84,7 @@ class MyOtherClass
   def greet
     pretty_output(:welcome)
     # Or simply
-    pou(:welcome)
+    pou :welcome
   end
 end
 ```
@@ -111,7 +111,7 @@ the "Further Customization" section for more info.
 So by saying `pretty_output(:show_result, result: result)` you are fetching a message under the key
 `show_result` and replace the `{{result}}` part with the value of the `result` variable. Simple, eh?
 
-## Nesting
+### Nesting
 
 MessagesDictionary supports nesting (similar to localization files in Rails):
 
@@ -136,7 +136,7 @@ class MyClass
 end
 ```
 
-## Indifferent Access
+### Indifferent Access
 
 Keys can be passed to the `pou` method as symbols or strings - it does not really matter:
 
@@ -168,7 +168,7 @@ inside the same directory. However, this behavior can be easily changed with the
 ```ruby
 class MyClass
   include MessagesDictionary
-  has_messages_dictionary file: 'some_file.yml', dir: 'C:\my_docs'
+  has_messages_dictionary file: 'some_file.yml', dir: 'my_docs'
 end
 ```
 
