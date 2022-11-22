@@ -3,11 +3,10 @@
 module MessagesDictionary
   # Main module that injects all the necessary methods in the target class
   module Injector
-    using MessagesDictionary::Utils::StringUtils
-
     def self.included(klass)
       klass.extend ClassMethods
       klass.include InstanceMethods
+      klass.extend InstanceMethods
     end
 
     # Class methods to be defined in the target (where the module was included)
@@ -17,27 +16,8 @@ module MessagesDictionary
       # with all the necesary goodies
       def has_messages_dictionary(opts = {})
         # rubocop:enable Naming/PredicateName
-        messages = MessagesDictionary::Utils::Dict.new(
-          opts.fetch(:messages) { __from_file(opts) }
-        )
 
-        const_set(:DICTIONARY_CONF, {msgs: messages,
-                                     output: opts[:output] || $stdout,
-                                     method: opts[:method] || :puts,
-                                     transform: opts[:transform]})
-      end
-
-      private
-
-      def __from_file(opts)
-        file = opts[:file] || "#{name.nil? ? 'unknown' : name.snakecase}.yml"
-        file = File.expand_path(file, opts[:dir]) if opts[:dir]
-
-        begin
-          YAML.load_file(file)
-        rescue Errno::ENOENT
-          abort "File #{file} does not exist..."
-        end
+        const_set :DICTIONARY_CONF, MessagesDictionary::Config.new(opts, self)
       end
     end
 
@@ -46,8 +26,10 @@ module MessagesDictionary
       # This method will output your messages, perform interpolation,
       # and transformations
       def pretty_output(key, values = {}, &block)
-        msg = self.class::DICTIONARY_CONF[:msgs].deep_fetch(*key.to_s.split('.')) do
-          raise KeyError, "#{key} cannot be found in the provided file..."
+        __config.load_messages!
+
+        msg = __config.msgs.deep_fetch(*key.to_s.split('.')) do
+          handle_key_missing(key)
         end
 
         __process(
@@ -61,6 +43,16 @@ module MessagesDictionary
 
       private
 
+      def handle_key_missing(key)
+        raise KeyError, "#{key} cannot be found..." if __config.on_key_missing == :raise
+
+        __config.on_key_missing.call(key)
+      end
+
+      def __config
+        @__config ||= respond_to?(:const_get) ? const_get(:DICTIONARY_CONF) : self.class.const_get(:DICTIONARY_CONF)
+      end
+
       def __replace(msg, values)
         values.each do |k, v|
           msg.gsub!(Regexp.new("\\{\\{#{k}\\}\\}"), v.to_s)
@@ -70,12 +62,12 @@ module MessagesDictionary
       end
 
       def __process(msg, &block)
-        transform = block || self.class::DICTIONARY_CONF[:transform]
+        transform = block || __config.transform
 
         if transform
           transform.call(msg)
         else
-          self.class::DICTIONARY_CONF[:output].send(self.class::DICTIONARY_CONF[:method].to_sym, msg)
+          __config.output_target.send(__config.output_method, msg)
         end
       end
     end

@@ -35,9 +35,7 @@ Another, a bit more complex, use case in the [lessons_indexer gem](https://githu
 * [Other classes simply inherit from it](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer/indexer.rb#L2)
 * [Messages are fetched easily](https://github.com/bodrovis/lessons_indexer/blob/master/lib/lessons_indexer/indexer.rb#L45)
 
-## Usage
-
-### Basic Example
+## Basic usage
 
 Suppose you have the following program:
 
@@ -113,7 +111,7 @@ the "Further Customization" section for more info.
 So by saying `pretty_output(:show_result, result: result)` you are fetching a message under the key
 `show_result` and replace the `{{result}}` part with the value of the `result` variable. Simple, eh?
 
-### Nesting
+## Nesting
 
 MessagesDictionary supports nesting (similar to localization files in Rails):
 
@@ -138,7 +136,7 @@ class MyClass
 end
 ```
 
-### Indifferent Access
+## Indifferent Access
 
 Keys can be passed to the `pou` method as symbols or strings - it does not really matter:
 
@@ -156,9 +154,9 @@ class MyClass
 end
 ```
 
-### Further Customization
+## Further Customization
 
-#### Specifying File Name and Directory
+### Specifying File Name and Directory
 
 By default `messages_dictionary` will search for a *.yml* file named after your class (converted to snake case,
 so for the `MyClass` the file should be named *my_class.yml*)
@@ -176,7 +174,23 @@ end
 
 Both of these options are not mandatory.
 
-#### Specifying Messages Hash
+### Providing a custom file loader
+
+By default the gem a messages file in YAML format. However, you might want to use a different format: for example, JSON. In this case you'll have to provide a custom loader:
+
+```ruby
+class MyClass
+  include MessagesDictionary
+  has_messages_dictionary file: 'test_file.json', dir: 'my_dir',
+                          file_loader: ->(file_path) { JSON.parse(File.read(file_path)) }
+end
+```
+
+The `:file_loader` option accepts a proc or a lambda that receives a path to your messages file as an argument. This lambda must return a hash object with keys and the corresponding values.
+
+The default value for the `:file_loader` is `->(f) { YAML.safe_load_file(f) }`.
+
+### Specifying Messages Hash
 
 Instead of loading messages from a file, you can pass hash to the `has_messages_dictionary` using `:messages` option:
 
@@ -189,7 +203,7 @@ end
 
 Nesting and all other features are supported as well.
 
-#### Specifying Output and Display Method
+### Specifying Output and Display Method
 
 By default all messages will be outputted to `STDOUT` using `puts` method, however this can be changed:
 
@@ -204,7 +218,32 @@ class MyClass
 end
 ```
 
-#### Providing Custom Transformation Logic
+### "Lazy" mode
+
+By default this gem will load all messages from the given file. However, you can enable a "lazy" mode so that messages are not loaded until `pou` or `pretty_output` methods have been called. The "lazy" mode can only be enabled when the `:file` option is provided (in other words, `:lazy` has no effect with the `:messages` setting):
+
+```ruby
+class MyClass
+  include MessagesDictionary
+  has_messages_dictionary lazy: true, file: 'my_file.yml'
+
+  def greet
+    pou :hi
+  end
+end
+
+# At this point no messages are loaded from the given file
+
+obj = MyClass.new
+
+# ... doing some other stuff ...
+
+# Messages are still not loaded at this point!
+
+obj.greet # Now all messages will be loaded from the YAML file
+```
+
+### Providing Custom Transformation Logic
 
 Suppose you want to transform your message somehow or even simply return it instead of printing on the screen.
 `pretty_output` method accepts an optional block for this purpose:
@@ -261,6 +300,45 @@ def greet
   end
 end
 ```
+
+### Handling missing keys
+
+By default when a non-existent key is requested, an error will be raised:
+
+```ruby
+class MyClass
+  include MessagesDictionary
+  has_messages_dictionary messages: {key: 'value'}
+
+  def greet
+    pou :unknown_key # trying to use some unknown key...
+  end
+end
+
+obj = MyClass.new
+
+obj.greet # KeyError is raised here!
+```
+
+However, you can adjust the `:on_key_missing` option and provide a custom proc or lambda to handle all missing keys:
+
+```ruby
+class MyClass
+  include MessagesDictionary
+  has_messages_dictionary messages: {key: 'value'},
+                          on_key_missing: ->(key) { key } # We simply return the requested key itself
+
+  def greet
+    pou :unknown_key
+  end
+end
+
+obj = MyClass.new
+
+obj.greet # Prints "unknown_key" to the screen, no errors will be raised
+```
+
+So, in the example above we simply return the key itself if it was not found in the messages hash.
 
 ## License
 

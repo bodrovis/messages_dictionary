@@ -70,6 +70,7 @@ PLATFORMS
 
 DEPENDENCIES
   codecov (~> 0.1)
+  json (~> 2)
   messages_dictionary!
   rake (~> 13.0)
   rspec (~> 3.6)
