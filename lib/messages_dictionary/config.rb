@@ -59,7 +59,7 @@ module MessagesDictionary
         @__storage = :file
         @file = opts[:file] || "#{@__klass.name.nil? ? 'unknown' : @__klass.name.snakecase}.yml"
         @file = File.expand_path(@file, opts[:dir] || '.')
-        @file_loader = opts[:file_loader] || ->(f) { YAML.safe_load_file(f) }
+        @file_loader = opts[:file_loader] || ->(f) { YAML.load_file(f) }
       end
     end
   end

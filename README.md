@@ -188,7 +188,7 @@ end
 
 The `:file_loader` option accepts a proc or a lambda that receives a path to your messages file as an argument. This lambda must return a hash object with keys and the corresponding values.
 
-The default value for the `:file_loader` is `->(f) { YAML.safe_load_file(f) }`.
+The default value for the `:file_loader` is `->(f) { YAML.load_file(f) }`.
 
 ### Specifying Messages Hash
 
