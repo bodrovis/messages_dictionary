@@ -13,15 +13,15 @@ RSpec.describe MessagesDictionary::Injector do
             has_messages_dictionary file: 'my_test_file.yml', dir: 'my_test_dir', lazy: true
           end
 
-          expect(dummy::DICTIONARY_CONF.instance_variable_get(:@__loaded)).to be_falsey
-          expect(dummy::DICTIONARY_CONF.msgs).to be_nil
+          expect(dummy.msg_dict_config.instance_variable_get(:@__loaded)).to be_falsey
+          expect(dummy.msg_dict_config.msgs).to be_nil
 
           object = dummy.new
           expect(object.send(:pretty_output, :test) { |msg| msg }).to eq('string')
           expect(object.send(:pretty_output, :interpolated, a: 42) { |msg| msg }).to eq('Value is 42')
 
-          expect(dummy::DICTIONARY_CONF.instance_variable_get(:@__loaded)).to be true
-          expect(dummy::DICTIONARY_CONF.msgs.keys).to include('test', 'interpolated')
+          expect(dummy.msg_dict_config.instance_variable_get(:@__loaded)).to be true
+          expect(dummy.msg_dict_config.msgs.keys).to include('test', 'interpolated')
         end
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe MessagesDictionary::Injector do
           has_messages_dictionary messages: {test: 'string'}
         end
 
-        expect(dummy::DICTIONARY_CONF.output_target).to eq($stdout)
+        expect(dummy.msg_dict_config.output_target).to eq($stdout)
       end
 
       it 'uses puts method by default' do
@@ -40,7 +40,7 @@ RSpec.describe MessagesDictionary::Injector do
           has_messages_dictionary messages: {test: 'string'}
         end
 
-        expect(dummy::DICTIONARY_CONF.output_method).to eq(:puts)
+        expect(dummy.msg_dict_config.output_method).to eq(:puts)
       end
 
       it 'allows customizing output and method' do
@@ -98,9 +98,22 @@ RSpec.describe MessagesDictionary::Injector do
           has_messages_dictionary messages: {parent: {child: 'child_string'}}
         end
 
-        expect(dummy::DICTIONARY_CONF.instance_variable_get(:@__loaded)).to be true
+        expect(dummy.msg_dict_config.instance_variable_get(:@__loaded)).to be true
         object = dummy.new
         expect(object.send(:pretty_output, 'parent.child') { |msg| msg }).to eq('child_string')
+      end
+
+      it 'supports indifferent access' do
+        dummy.class_eval do
+          has_messages_dictionary messages: {test: 'string'}
+        end
+
+        object = dummy.new
+
+        expect(object.send(:pou, :test) { |msg| msg }).to eq('string')
+        expect(object.send(:pou, 'test') { |msg| msg }).to eq('string')
+        expect(dummy.msg_dict_config.msgs.key?(:test)).to be true
+        expect(dummy.msg_dict_config.msgs.key?('test')).to be true
       end
     end
 

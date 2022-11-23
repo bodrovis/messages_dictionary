@@ -26,16 +26,23 @@ module MessagesDictionary
       # This method will output your messages, perform interpolation,
       # and transformations
       def pretty_output(key, values = {}, &block)
-        __config.load_messages!
+        msg_dict_config.load_messages!
 
-        msg = __config.msgs.deep_fetch(*key.to_s.split('.')) do
-          handle_key_missing(key)
-        end
+        msg = msg_dict_config.msgs.dig(*key.to_s.split('.'))
+        msg = handle_key_missing(key) if msg.nil?
 
         __process(
           __replace(msg, values),
           &block
         )
+      end
+
+      def msg_dict_config
+        @msg_dict_config ||= if respond_to?(:const_get)
+                               const_get(:DICTIONARY_CONF)
+                             else
+                               self.class.const_get(:DICTIONARY_CONF)
+                             end
       end
 
       private :pretty_output
@@ -44,31 +51,27 @@ module MessagesDictionary
       private
 
       def handle_key_missing(key)
-        raise KeyError, "#{key} cannot be found..." if __config.on_key_missing == :raise
+        handler = msg_dict_config.on_key_missing
 
-        __config.on_key_missing.call(key)
-      end
+        raise KeyError, "#{key} cannot be found..." if handler == :raise
 
-      def __config
-        @__config ||= respond_to?(:const_get) ? const_get(:DICTIONARY_CONF) : self.class.const_get(:DICTIONARY_CONF)
+        handler.call(key)
       end
 
       def __replace(msg, values)
-        values.each do |k, v|
-          msg.gsub!(Regexp.new("\\{\\{#{k}\\}\\}"), v.to_s)
+        values.each do |key, value|
+          msg.gsub!(Regexp.new("\\{\\{#{key}\\}\\}"), value.to_s)
         end
 
         msg
       end
 
       def __process(msg, &block)
-        transform = block || __config.transform
+        transform = block || msg_dict_config.transform
 
-        if transform
-          transform.call(msg)
-        else
-          __config.output_target.send(__config.output_method, msg)
-        end
+        return transform.call(msg) if transform
+
+        msg_dict_config.output_target.send(msg_dict_config.output_method, msg)
       end
     end
   end
