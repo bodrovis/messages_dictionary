@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/messages_dictionary.svg)](https://badge.fury.io/rb/messages_dictionary)
 ![CI](https://github.com/bodrovis-learning/messages_dictionary/actions/workflows/ci.yml/badge.svg)
-[![Test Coverage](https://codecov.io/gh/bodrovis-learning/messages_dictionary/graph/badge.svg)](https://codecov.io/gh/bodrovis-learning/messages_dictionary)
+[![Coverage Status](https://coveralls.io/repos/github/bodrovis-learning/messages_dictionary/badge.svg?branch=master)](https://coveralls.io/github/bodrovis-learning/messages_dictionary?branch=master)
 ![Downloads total](https://img.shields.io/gem/dt/messages_dictionary)
 
 This gem started as an educational project for my student. The idea behind this gem is to organize
