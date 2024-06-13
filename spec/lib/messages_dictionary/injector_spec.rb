@@ -247,7 +247,7 @@ RSpec.describe MessagesDictionary::Injector do
     it 'per-method takes higher priority than per-class' do
       dummy.class_eval do
         has_messages_dictionary messages: {test: 'string'},
-                                transform: ->(msg) { msg.reverse }
+                                transform: lambda(&:reverse)
       end
 
       object = dummy.new
