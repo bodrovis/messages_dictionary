@@ -1,5 +1,7 @@
 # MessagesDictionary
 
+Sample change
+
 [![Gem Version](https://badge.fury.io/rb/messages_dictionary.svg)](https://badge.fury.io/rb/messages_dictionary)
 ![CI](https://github.com/bodrovis-learning/messages_dictionary/actions/workflows/ci.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/bodrovis-learning/messages_dictionary/badge.svg?branch=master)](https://coveralls.io/github/bodrovis-learning/messages_dictionary?branch=master)
